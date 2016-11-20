@@ -56,7 +56,12 @@ g + geom_point() # auto-print
 g + geom_point() + geom_smooth()
 g + geom_point() + geom_smooth(method = "lm")
 
-g + geom_point() + facet_grid(. ~ bmicat) + geom_smooth(method = "lm")
+a <- ggplot(diamonds, aes(depth, price))
+cutpoints <- quantile(diamonds$carat, seq(0,1,length=4), na.rm= TRUE)
+diamonds$car2 <- cut(diamonds$carat, cutpoints)
+a + geom_point(alpha = 1/3) + facet_grid(cut ~ car2)
+a + geom_point(alpha = 1/3) + facet_grid(cut ~ car2)+geom_smooth(method = "lm")
+
 # Annotation
 # xlab(), ylab(), labs(), ggtitle()
 # Modifying Aesthetics
